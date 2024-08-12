@@ -1,3 +1,20 @@
+>db.students.insertMany([
+{ "student_id": 1, "name": "Alice Johnson", "age": 20, "gender": "Female", "courses":
+["Math", "Science"], "grade": "A", "address": { "street": "123 Maple St", "city": "Springfield", 
+"state": "IL", "zip": "62701" } },
+{ "student_id": 2, "name": "Bob Smith", "age": 22, "gender": "Male", "courses": ["English",
+"History"], "grade": "B", "address": { "street": "456 Oak St", "city": "Springfield", "state": "IL", 
+"zip": "62702" } },
+{ "student_id": 3, "name": "Charlie Brown", "age": 23, "gender": "Male", "courses":
+["Math", "Art"], "grade": "C", "address": { "street": "789 Pine St", "city": "Springfield", 
+"state": "IL", "zip": "62703" } },
+{ "student_id": 4, "name": "Diana Prince", "age": 21, "gender": "Female", "courses":
+["Science", "History"], "grade": "B", "address": { "street": "321 Birch St", "city": "Springfield", 
+"state": "IL", "zip": "62704" } },
+{ "student_id": 25, "name": "Yara Bell", "age": 20, "gender": "Female", "courses": ["Math",
+"Science"], "grade": "A", "address": { "street": "123 Oak St", "city": "Springfield", "state": "IL", 
+"zip": "62725" } }]);
+
 > db.students.find({},
 { name: 1, age: 1 } // Include name and age, exclude _id and address
 )
