@@ -1,0 +1,19 @@
+> db.students.find({ age: { $gt: 21 } })
+
+>db.students.find({ age: { $lt: 22 } })
+
+>db.students.find({ age: { $eq: 23 } })
+
+>db.students.find({ age: { $ne: 22 } })
+
+> db.students.find({ age: { $in: [21, 23] } })
+
+> db.students.find({ age: { $nin: [21, 23] } })
+
+> db.students.find({ $and: [{ age: 22 }, { grade: 'B' }] })
+
+> db.students.find({ $or: [{ age: 21 }, { grade: 'A' }] })
+
+> db.students.find({ grade: { $not: { $eq: 'A' } } })
+
+> db.students.find({ $nor: [{ age: 21 }, { grade: 'B' }] })
