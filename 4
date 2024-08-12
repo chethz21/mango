@@ -1,0 +1,21 @@
+> db.students.insertMany([{ "student_id": 60, 
+"name": "Alice Johnson",
+"age": 23,
+"courses": [
+{ "name": "Math", "grade": "A" },
+{ "name": "Physics", "grade": "B" },
+{ "name": "Chemistry", "grade": "A" }
+] ]})
+
+> db.students.find(
+{ "student_id": 60, "courses.grade": "A" },
+{ "courses.$": 1} )
+
+> db.students.find(
+{ "student_id": 60 },
+{ "courses": { $elemMatch: { "grade": "A" } }}
+)
+
+> db.students.find(
+{ "student_id": 60 },
+{ "courses": { $slice: 2 } })
