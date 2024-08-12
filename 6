@@ -1,0 +1,29 @@
+> db.students.insertMany([
+{student_id: 1, name: "Alice Johnson", age: 23, grade: "A", scores: [85, 90, 95] },
+{student_id: 2, name: "Bob Smith", age: 22, grade: "B", scores: [75, 80, 85] },
+{student_id: 3, name: "Charlie Brown", age: 24, grade: "A", scores: [90, 95, 100] },
+{student_id: 4, name: "Diana Prince", age: 21, grade: "C", scores: [65, 70, 75] },
+{student_id: 5, name: "Eve Adams", age: 23, grade: "B", scores: [80, 85, 90] },
+{student_id: 6, name: "Frank White", age: 22, grade: "A", scores: [88, 92, 96] },
+])
+
+> db.students.aggregate([
+{ $match: { grade: "A" } }, 
+{
+$project: { name: 1,averageScore: { $avg: "$scores" }} 
+},
+{ $sort: { averageScore: -1 } }, 
+{ $limit: 2 } 
+])
+
+> db.students.aggregate([
+{
+$group: { 
+_id: "$grade",
+studentCount: { $sum: 1 }}
+},
+{ $sort: { studentCount: -1 } }, 
+{ $skip: 1 }, 
+{ $project: { 
+_id: 0,grade: "$_id",studentCount: 1 } }
+])
