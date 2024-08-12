@@ -1,0 +1,12 @@
+> db.students.find({},
+{ name: 1, age: 1 } // Include name and age, exclude _id and address
+)
+
+> db.students.find( {},
+{ name: 1, courses: 1}
+)
+
+db.students.find( { },
+{ name: 1, age: 1 }
+).limit(5)
+
