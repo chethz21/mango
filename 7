@@ -1,0 +1,65 @@
+> db. listingsAndReviews .insertMany( [ {
+ "listing_id": "10006546",
+ "listing_url": "https://www.example.com/rooms/10006546",
+ "name": "Beautiful Beach House",
+ "address": {
+ "street": "123 Beach St",
+ "suburb": "Santa Monica",
+ "state": "CA",
+ "country": "United States"
+ },
+ "host": {
+ "host_id": "12345678",
+ "host_picture_url": "https://www.example.com/host12345678.jpg"
+ },}]);
+
+> db.listingsAndReviews.find( { },
+ { _id: 0,
+ listing_url: 1,
+ name: 1,
+ "address.street": 1,
+ "address.suburb": 1,
+ "address.state": 1,
+ "address.country": 1,
+ "host.host_picture_url": 1
+ } )
+
+B:
+> db.ecommerce.insertMany( [ {
+ "product_id": "1001",
+ "name": "Smartphone",
+ "category": "Electronics",
+ "price": 299.99,
+ "reviews": 
+[ {
+ "reviewer_name": "Alice",
+ "review_date": "2024-01-10",
+ "rating": 5,
+ "comment": "Excellent phone with great battery life!"
+ },
+ {
+ "reviewer_name": "Bob",
+ "review_date": "2024-02-12",
+ "rating": 4,
+ "comment": "Good value for money."
+ } ] } ] )
+
+db.ecommerce.aggregate([
+ { $unwind: "$reviews" // Unwind the reviews array to work with individual review documents
+ },
+ {
+ $group: {
+ _id: "$product_id",
+ productName: { $first: "$name" },
+ averageRating: { $avg: "$reviews.rating" },
+ totalReviews: { $sum: 1 }
+ }
+},
+ { $project: {
+ _id: 0,
+ product_id: "$_id",
+ productName: 1,
+ averageRating: 1,
+ totalReviews: 1
+ } } ] )
+
